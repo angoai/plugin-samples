@@ -10,15 +10,15 @@ PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 PAGE_SIZE = 50
 
 
-def sample_callback_function(data):
-    bucket = data.get("bucket")
-    folder = data.get("folder", "")
-    files = data.get("files", None)
-    upload = data.get("upload", False)
-    project = data.get("project", None)
-    integration_id = data.get("integrationId", None)
-    scroll_token = data.get("scrollToken", None)
-    api_key = data.get("apiKey")
+def sample_callback_function(**kwargs):
+    bucket = kwargs.get("bucket")
+    folder = kwargs.get("folder", "")
+    files = kwargs.get("files", None)
+    upload = kwargs.get("upload", False)
+    project = kwargs.get("project", None)
+    integration_id = kwargs.get("integrationId", None)
+    scroll_token = kwargs.get("scrollToken", None)
+    api_key = kwargs.get("apiKey")
     sdk = SDK(api_key=api_key, host=HOST)
     integration = sdk.get_integrations(integration_id)
 
