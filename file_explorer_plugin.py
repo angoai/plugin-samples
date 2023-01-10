@@ -15,7 +15,7 @@ def sample_callback_function(**kwargs):
     folder = kwargs.get("folder", "")
     files = kwargs.get("files", None)
     upload = kwargs.get("upload", False)
-    project = kwargs.get("project", None)
+    project = kwargs.get("projectId", None)
     integration_id = kwargs.get("integrationId", None)
     scroll_token = kwargs.get("scrollToken", None)
     api_key = kwargs.get("apiKey")
