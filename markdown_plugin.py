@@ -35,7 +35,7 @@ def sample_callback_function(projectId, file, batches, markdown_text, logger):
             markdown_text_processed = markdown_text_processed.replace(search_keyword, replace_keyword)
 
         # Create temporary md file
-        f = open("%sdemofile%s.txt" % (TEMP_FILE, index), "w")
+        f = open("%sdemofile%s.md" % (TEMP_FILE, index), "w")
         f.write(markdown_text_processed)
         f.close()
         fullpath = f.name
