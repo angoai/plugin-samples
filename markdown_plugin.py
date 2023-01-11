@@ -1,5 +1,6 @@
 import os
-import tempfile
+from shutil import rmtree
+
 import pandas as pd
 from ango.sdk import SDK
 from html import unescape
@@ -20,10 +21,11 @@ def sample_callback_function(projectId, file, batches, markdown_text, logger):
     # Replace escape parameters in HTML code
     markdown_text_raw = unescape(markdown_text)
 
+    TEMP_FILE = '/tmp/ango'
     # Create tmp directory
-    if not os.path.exists('tmp'):
-        os.mkdir('tmp')
-
+    if not os.path.exists(TEMP_FILE):
+        os.mkdir(TEMP_FILE)
+    file_paths = []
     for index in range(len(data_df)):
         # Replace placeholders in markdown text with the values on the CSV file
         markdown_text_processed = markdown_text_raw
@@ -33,15 +35,16 @@ def sample_callback_function(projectId, file, batches, markdown_text, logger):
             markdown_text_processed = markdown_text_processed.replace(search_keyword, replace_keyword)
 
         # Create temporary md file
-        with tempfile.TemporaryFile(dir='tmp', suffix='.md', delete=False) as tmp_file:
-            tmp_file.write(markdown_text_processed.encode())
-            fullpath = tmp_file.name
+        f = open("%sdemofile%s.txt" % (TEMP_FILE, index), "w")
+        f.write(markdown_text_processed)
+        f.close()
+        fullpath = f.name
 
         # Upload created markdown file
         external_id = str(index).zfill(5) + '.md'
-        file_paths = [{"data": fullpath, "externalId": external_id}]
-        sdk.upload_files(projectId, file_paths)
-        os.remove(fullpath)
+        file_paths.append({"data": fullpath, "externalId": external_id})
+    sdk.upload_files(projectId, file_paths)
+    rmtree(TEMP_FILE)
 
     return 'All markdown files are uploaded!'
 
