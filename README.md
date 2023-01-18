@@ -9,3 +9,8 @@
 4. File Explorer Plugin [[Code](file_explorer_plugin.py)]
 5. Input Plugin
 6. Markdown Plugin [[Code](markdown_plugin.py)]
+
+
+<h2>Cloud Deployment Examples</h2>
+
+1. [[AWS Lightsail Containers](docs/AWS_Lightsail_Deployment.md)]
