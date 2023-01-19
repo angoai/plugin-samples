@@ -2,7 +2,6 @@ import json
 import zipfile
 from tqdm import tqdm
 from io import BytesIO
-from ango.sdk import SDK
 from ango.plugins import ExportPlugin, run
 
 HOST = '<YOUR HOST>'
@@ -10,13 +9,16 @@ API_KEY = '<YOUR API KEY>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 
-sdk = SDK(api_key=API_KEY, host=HOST)
 
+def sample_callback(**data):
+    # Extract input parameters
+    project_id = data.get('projectId')
+    json_export = data.get('jsonExport')
+    logger = data.get('logger')
 
-def sample_callback_function(projectId, jsonExport, logger):
     # Convert annotation data to intended format
     file_list = []
-    for image_index, asset in enumerate(tqdm(jsonExport)):
+    for image_index, asset in enumerate(tqdm(json_export)):
         external_id = asset['externalId']
         data_url = asset['asset']
         objects = asset['tasks'][0]['objects']
@@ -34,10 +36,10 @@ def sample_callback_function(projectId, jsonExport, logger):
         file_list.append({'externalId': external_id, 'URL': data_url, 'Annotations': object_string})
 
     # Create zip file
-    zip_file_name = projectId + '.zip'
+    zip_file_name = project_id + '.zip'
     zip_data = BytesIO()
     with zipfile.ZipFile(zip_data, mode="w") as zf:
-        zf.writestr(projectId + '.json', json.dumps(file_list))
+        zf.writestr(project_id + '.json', json.dumps(file_list, indent=4))
 
     return zip_file_name, zip_data
 
@@ -46,7 +48,7 @@ if __name__ == "__main__":
     plugin = ExportPlugin(id=PLUGIN_ID,
                           secret=PLUGIN_SECRET,
                           api_key=API_KEY,
-                          callback=sample_callback_function,
+                          callback=sample_callback,
                           host=HOST)
 
     run(plugin, host=HOST)

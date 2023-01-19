@@ -2,26 +2,31 @@ from ango.sdk import SDK
 from ango.plugins import BatchModelPlugin, run
 
 HOST = '<YOUR HOST>'
-API_KEY = '<YOUR API KEY>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 
-sdk = SDK(api_key=API_KEY, host=HOST)
 
+def run_model(**data):
+    # Extract input parameters
+    project_id = data.get('projectId')
+    category_schema = data.get('categorySchema')
+    logger = data.get('logger')
+    api_key = data.get('apiKey')
 
-def run_model(projectId, categorySchema, logger):
     # Check whether class mapping is done or not
-    if len(categorySchema) == 0:
+    if len(category_schema) == 0:
         return "Please complete class mapping!"
+
+    sdk = SDK(api_key=api_key, host=HOST)
 
     # Get assets of the project
     # get_assets(project_id) returns only 10 assets. For more information check Ango SDK Documentation:
     # https://docs.ango.ai/sdk/sdk-documentation#get_assets-project_id-asset_id-external_id-page-limit
-    get_assets_response = sdk.get_assets(projectId)
+    get_assets_response = sdk.get_assets(project_id)
     asset_list = get_assets_response['data']['assets']
 
     # Add a dummy bounding-box to every asset
-    schema_id = categorySchema[0]['schemaId']  # Get schema_id of the first class
+    schema_id = category_schema[0]['schemaId']  # Get schema_id of the first class
     annotation_json_list = []
     for asset in asset_list:
         # model
@@ -32,7 +37,7 @@ def run_model(projectId, categorySchema, logger):
         annotation_json_list.append(annotation_json)
 
     # Import labels via SDK
-    sdk.import_labels(projectId, annotation_json_list)
+    sdk.import_labels(project_id, annotation_json_list)
     return "All annotations are imported!"
 
 

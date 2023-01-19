@@ -3,22 +3,22 @@ from ango.sdk import SDK
 from ango.plugins import FileExplorerPlugin, run
 
 HOST = '<YOUR HOST>'
-# API_KEY = '<YOUR API KEY>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 
 PAGE_SIZE = 50
 
 
-def sample_callback_function(**kwargs):
-    bucket = kwargs.get("bucket")
-    folder = kwargs.get("folder", "")
-    files = kwargs.get("files", None)
-    upload = kwargs.get("upload", False)
-    project = kwargs.get("projectId", None)
-    integration_id = kwargs.get("integrationId", None)
-    scroll_token = kwargs.get("scrollToken", None)
-    api_key = kwargs.get("apiKey")
+def sample_callback(**data):
+    # Extract input parameters
+    bucket = data.get("bucket")
+    folder = data.get("folder", "")
+    files = data.get("files", None)
+    upload = data.get("upload", False)
+    project = data.get("project", None)
+    integration_id = data.get("integrationId", None)
+    scroll_token = data.get("scrollToken", None)
+    api_key = data.get("apiKey")
     sdk = SDK(api_key=api_key, host=HOST)
     integration = sdk.get_integrations(integration_id)
 
@@ -54,7 +54,6 @@ def sample_callback_function(**kwargs):
             return {"status": "fail", "error": response}
 
     else:
-
         page_iterator = s3paginator.paginate(Bucket=bucket,
                                              Prefix=path,
                                              Delimiter='/',
@@ -86,5 +85,5 @@ def sample_callback_function(**kwargs):
 if __name__ == "__main__":
     plugin = FileExplorerPlugin(id=PLUGIN_ID,
                                 secret=PLUGIN_SECRET,
-                                callback=sample_callback_function)
+                                callback=sample_callback)
     run(plugin, host=HOST)
