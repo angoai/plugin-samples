@@ -15,7 +15,7 @@ def sample_callback(**data):
     folder = data.get("folder", "")
     files = data.get("files", None)
     upload = data.get("upload", False)
-    project = data.get("project", None)
+    project = data.get("projectId", None)
     integration_id = data.get("integrationId", None)
     scroll_token = data.get("scrollToken", None)
     api_key = data.get("apiKey")
