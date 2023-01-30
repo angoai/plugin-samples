@@ -1,9 +1,14 @@
 from ango.sdk import SDK
 from ango.plugins import BatchModelPlugin, run
+import json
 
-HOST = '<YOUR HOST>'
-PLUGIN_ID = '<YOUR PLUGIN ID>'
-PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
+HOST = 'https://apibeta.ango.ai'
+PLUGIN_ID = "63b3de3f84dc82001280d2ba"
+PLUGIN_SECRET = "84396303-fa7b-4ba2-b482-ca5742e5a887"
+
+# HOST = '<YOUR HOST>'
+# PLUGIN_ID = '<YOUR PLUGIN ID>'
+# PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 
 
 def run_model(**data):
@@ -12,6 +17,8 @@ def run_model(**data):
     category_schema = data.get('categorySchema')
     logger = data.get('logger')
     api_key = data.get('apiKey')
+    config_str = data.get('configJSON')
+    config = json.loads(config_str)
 
     # Check whether class mapping is done or not
     if len(category_schema) == 0:
@@ -33,7 +40,7 @@ def run_model(**data):
         external_id = asset['externalId']
         annotation_json = {"externalId": external_id,
                            "objects": [{"schemaId": schema_id,
-                                        "bounding-box": {"x": 20, "y": 30, "width": 50, "height": 60}}]}
+                                        "bounding-box": config["dummy-bounding-box"]}]}
         annotation_json_list.append(annotation_json)
 
     # Import labels via SDK
