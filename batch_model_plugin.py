@@ -2,7 +2,6 @@ from ango.sdk import SDK
 from ango.plugins import BatchModelPlugin, run
 import json
 
-
 HOST = '<YOUR HOST>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
@@ -17,8 +16,12 @@ def run_model(**data):
     config_str = data.get('configJSON')
     config = json.loads(config_str)
 
+    logger.info("Plugin session is started!")
+
     # Check whether class mapping is done or not
-    if len(category_schema) == 0:
+    if category_schema is None:
+        logger.warning("Please complete class mapping!")
+        logger.info("Plugin session is ended!")
         return "Please complete class mapping!"
 
     sdk = SDK(api_key=api_key, host=HOST)
@@ -42,6 +45,7 @@ def run_model(**data):
 
     # Import labels via SDK
     sdk.import_labels(project_id, annotation_json_list)
+    logger.info("Plugin session is ended!")
     return "All annotations are imported!"
 
 

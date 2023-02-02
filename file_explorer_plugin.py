@@ -2,6 +2,7 @@ import boto3 as boto3
 from ango.sdk import SDK
 from ango.plugins import FileExplorerPlugin, run
 
+
 HOST = '<YOUR HOST>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
@@ -15,10 +16,14 @@ def sample_callback(**data):
     folder = data.get("folder", "")
     files = data.get("files", None)
     upload = data.get("upload", False)
-    project = data.get("projectId", None)
+    project_id = data.get("projectId", None)
     integration_id = data.get("integrationId", None)
     scroll_token = data.get("scrollToken", None)
     api_key = data.get("apiKey")
+    logger = data.get("logger")
+
+    logger.info("Plugin session is started!")
+
     sdk = SDK(api_key=api_key, host=HOST)
     integration = sdk.get_integrations(integration_id)
 
@@ -47,7 +52,8 @@ def sample_callback(**data):
                     if key[-1] != "/":
                         url = "https://%s.s3.%s.amazonaws.com/%s" % (bucket, region, key)
                         files_to_upload.append({"data": url, "externalId": key})
-        response = sdk.upload_files_cloud(project_id=project, assets=files_to_upload, integrationId=integration_id)
+        response = sdk.upload_files_cloud(project_id=project_id, assets=files_to_upload, integration_id=integration_id)
+        logger.info("Plugin session is ended!")
         if response.get("status", "") == "success":
             return {"status": "success"}
         else:
