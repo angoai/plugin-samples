@@ -15,7 +15,8 @@ def run_model(**data):
     logger = data.get('logger')
     api_key = data.get('apiKey')
     config_str = data.get('configJSON')
-    config = json.loads(config_str)
+    if config_str is not None:
+        config = json.loads(config_str)
 
     logger.info("Plugin session is started!")
 
