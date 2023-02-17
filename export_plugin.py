@@ -5,7 +5,6 @@ from io import BytesIO
 from ango.plugins import ExportPlugin, run
 
 HOST = '<YOUR HOST>'
-API_KEY = '<YOUR API KEY>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 
@@ -58,7 +57,6 @@ def sample_callback(**data):
 if __name__ == "__main__":
     plugin = ExportPlugin(id=PLUGIN_ID,
                           secret=PLUGIN_SECRET,
-                          api_key=API_KEY,
                           callback=sample_callback,
                           host=HOST)
 
