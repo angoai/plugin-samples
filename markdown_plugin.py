@@ -1,3 +1,4 @@
+import os
 import math
 import json
 import pandas as pd
@@ -39,6 +40,7 @@ def sample_callback_function(**data):
     api_key = data.get('apiKey')
     batches = data.get('batches', [])
     markdown_text = data.get('markdownText', [])
+    integration_id = data.get('integrationId')
     logger = data.get('logger')
     config_str = data.get('configJSON')
     config = json.loads(config_str)
@@ -64,6 +66,9 @@ def sample_callback_function(**data):
                 batch_field = field
                 batch_flag = True
                 break
+    elif batch_name_column == "IGNORE":
+        batch_field = ""
+        batch_flag = False
     else:
         batch_field = batch_name_column
         batch_flag = True
@@ -88,6 +93,7 @@ def sample_callback_function(**data):
 
     batch_size = upload_batch_size
     num_batches = math.ceil(len(data_df) / batch_size)
+    logger.info("Files Uploaded: [" + str(len(data_df)) + "/0]")
     for batch_index in range(num_batches):
         start_index = batch_index*batch_size
         end_index = np.min( [(batch_index+1)*batch_size, len(data_df)] )
@@ -117,6 +123,7 @@ def sample_callback_function(**data):
                 file_paths.append({"data": markdown_text_processed, "externalId": external_id})
 
         response = sdk.upload_files_cloud(project_id=project_id, assets=file_paths)
+        logger.info("Files Uploaded: [" + str(len(data_df)) + "/" + str(end_index) + "]")
 
     logger.info("Plugin session is ended!")
     if response['status'] == 'success':
