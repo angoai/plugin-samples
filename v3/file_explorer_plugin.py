@@ -2,7 +2,6 @@ import boto3 as boto3
 from ango.sdk import SDK
 from ango.plugins import FileExplorerPlugin, run
 
-
 HOST = '<YOUR HOST>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
