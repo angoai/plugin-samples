@@ -1,4 +1,0 @@
-id,name,surname,phone,birthday,birthplace,url1,url2,url3,url4,url5
-1001,Harry,Potter,1234,31.07.1980,London,https://en.wikipedia.org/wiki/Harry_Potter_(character),https://en.wikipedia.org/wiki/Daniel_Radcliffe,https://www.imdb.com/name/nm0705356/,https://www.rottentomatoes.com/celebrity/daniel_radcliffe,https://www.instagram.com/daniel9340/?hl=en
-1002,Hermione,Granger,4567,19.09.1979,London,https://en.wikipedia.org/wiki/Hermione_Granger,https://en.wikipedia.org/wiki/Emma_Watson,https://www.imdb.com/name/nm0914612/,https://www.rottentomatoes.com/celebrity/emma_watson,https://www.instagram.com/emmawatson/?hl=en
-1003,Ron,Weasley,1357,01.03.1980,London,https://en.wikipedia.org/wiki/Ron_Weasley,https://en.wikipedia.org/wiki/Rupert_Grint,https://www.imdb.com/name/nm0342488/,https://www.rottentomatoes.com/celebrity/rupert_grint,https://www.instagram.com/rupertgrint/?hl=en
