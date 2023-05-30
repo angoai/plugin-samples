@@ -1,3 +1,0 @@
-tqdm~=4.64.1
-ango~=0.1.4
-pandas
