@@ -1,6 +1,6 @@
 # Plugin Samples
 
-[__Plugin Documentation__](https://docs.ango.ai/custom-plugins/custom-plugin-documentation-wip)
+[__Plugin Documentation__](https://docs-v3.ango.ai/plugins/overview-of-plugins-in-ango-hub)
 
 
 1. Export Plugin [[Code](export_plugin.py)]
