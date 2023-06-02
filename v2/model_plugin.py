@@ -18,14 +18,15 @@ def run_model(**data):
         config = json.loads(config_str)
 
     logger.info("Plugin session is started!")
-
+    
+    object_id = "100001"
     if category_schema is None:
-        bbox_obj = [{"bounding-box": {"x": 20, "y": 30, "width": 50, "height": 60} }]
+        bbox_obj = [{"objectId": object_id, "bounding-box": {"x": 20, "y": 30, "width": 50, "height": 60}}]
         annotation_json = {"data": data_url,
                            "answer": {"objects": bbox_obj, "classifications": [], "relations": []}}
     else:
         schema_id = category_schema[0]['schemaId']
-        bbox_obj = [{"schemaId": schema_id,
+        bbox_obj = [{"objectId": object_id, "schemaId": schema_id,
                      "bounding-box": {"x": 20, "y": 30, "width": 50, "height": 60} }]
         annotation_json = {"data": data_url,
                            "answer": {"objects": bbox_obj, "classifications": [], "relations": []}}
