@@ -12,13 +12,13 @@ def run_model(**data):
     project_id = data.get('projectId')
     asset_id = data.get('assetId')
     category_schema = data.get('categorySchema')
-    logger = data.get('logger')
+    # logger = data.get('logger')
     api_key = data.get('apiKey')
     config_str = data.get('configJSON')
     if config_str is not None:
         config = json.loads(config_str)
 
-    logger.info("Plugin session is started!")
+    # logger.info("Plugin session is started!")
 
     sdk = SDK(api_key=api_key, host=HOST)
 
@@ -37,7 +37,7 @@ def run_model(**data):
         annotation_json = {"data": data_url,
                            "answer": {"objects": bbox_obj, "classifications": [], "relations": []}}
     
-    logger.info("Plugin session is ended!")
+    # logger.info("Plugin session is ended!")
     return annotation_json
 
 
