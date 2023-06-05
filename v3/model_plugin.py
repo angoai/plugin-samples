@@ -44,6 +44,7 @@ def run_model(**data):
 if __name__ == "__main__":
     plugin = ModelPlugin(id=PLUGIN_ID,
                          secret=PLUGIN_SECRET,
-                         callback=run_model)
+                         callback=run_model,
+                         host=HOST)
 
     run(plugin, host=HOST)
