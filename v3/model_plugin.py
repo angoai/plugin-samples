@@ -1,6 +1,6 @@
 import json
-from ango.sdk import SDK
-from ango.plugins import ModelPlugin, run
+from imerit_ango.sdk import SDK
+from imerit_ango.plugins import ModelPlugin, run
 
 HOST = '<YOUR HOST>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
