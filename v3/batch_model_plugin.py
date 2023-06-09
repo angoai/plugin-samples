@@ -1,6 +1,6 @@
 import json
-from ango.sdk import SDK
-from ango.plugins import BatchModelPlugin, run
+from imerit_ango.sdk import SDK
+from imerit_ango.plugins import BatchModelPlugin, run
 
 HOST = '<YOUR HOST>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
