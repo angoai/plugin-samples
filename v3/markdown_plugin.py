@@ -6,7 +6,7 @@ from io import BytesIO
 from ango.sdk import SDK
 from html import unescape
 from base64 import b64decode
-from ango.plugins import MarkdownPlugin, run
+from imerit_ango.plugins import MarkdownPlugin, run
 
 HOST = '<YOUR HOST>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
