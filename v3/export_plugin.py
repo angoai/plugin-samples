@@ -2,7 +2,7 @@ import json
 import zipfile
 from tqdm import tqdm
 from io import BytesIO
-from ango.plugins import ExportPlugin, run
+from imerit_ango.plugins import ExportPlugin, run
 
 HOST = '<YOUR HOST>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
