@@ -3,9 +3,9 @@ import json
 import numpy as np
 import pandas as pd
 from io import BytesIO
-from ango.sdk import SDK
 from html import unescape
 from base64 import b64decode
+from imerit_ango.sdk import SDK
 from imerit_ango.plugins import MarkdownPlugin, run
 
 HOST = '<YOUR HOST>'
