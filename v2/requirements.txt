@@ -1,4 +1,4 @@
-ango==1.1.0
+ango==1.1.1
 tqdm==4.65.0
 pandas==1.5.3
 numpy==1.22.3
