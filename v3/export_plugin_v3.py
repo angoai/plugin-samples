@@ -13,6 +13,7 @@ def sample_callback(**data):
     # Extract input parameters
     project_id = data.get('projectId')
     json_export = data.get('jsonExport')
+    num_assets = data.get('numTasks')
     logger = data.get('logger')
     config_str = data.get('configJSON')
     config = json.loads(config_str)
@@ -27,7 +28,7 @@ def sample_callback(**data):
 
     # Convert annotation data to intended format
     file_list = []
-    for image_index, asset in enumerate(tqdm(json_export)):
+    for asset_index, asset in enumerate(tqdm(json_export)):
         external_id = asset['externalId']
         data_url = asset['asset']
         objects = asset['task']['tools']
