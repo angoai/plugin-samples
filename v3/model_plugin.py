@@ -23,20 +23,19 @@ def run_model(**data):
     sdk = SDK(api_key=api_key, host=HOST)
 
     get_asset_response = sdk.get_assets(project_id=project_id, asset_id=asset_id)
-    data_url = get_asset_response['data']['assets'][0]['data']
-    
-    object_id = "100001"
+    external_id = get_asset_response['data']['assets'][0]['externalId']
+
     if category_schema is None:
-        bbox_obj = [{"objectId": object_id, "bounding-box": {"x": 20, "y": 30, "width": 50, "height": 60}}]
-        annotation_json = {"data": data_url,
-                           "answer": {"objects": bbox_obj, "classifications": [], "relations": []}}
+        bbox_obj = [{"bounding-box": {"x": 20, "y": 30, "width": 50, "height": 60}}]
+        annotation_json = {"externalId": external_id,
+                           "objects": bbox_obj, "classifications": [], "relations": []}
     else:
         schema_id = category_schema[0]['schemaId']
-        bbox_obj = [{"objectId": object_id, "schemaId": schema_id,
+        bbox_obj = [{"schemaId": schema_id,
                      "bounding-box": {"x": 20, "y": 30, "width": 50, "height": 60}}]
-        annotation_json = {"data": data_url,
-                           "answer": {"objects": bbox_obj, "classifications": [], "relations": []}}
-    
+        annotation_json = {"externalId": external_id,
+                           "objects": bbox_obj, "classifications": [], "relations": []}
+
     # logger.info("Plugin session is ended!")
     return annotation_json
 
