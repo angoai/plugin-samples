@@ -2,7 +2,7 @@ import json
 import zipfile
 from tqdm import tqdm
 from io import BytesIO
-from imerit_ango.plugins import ExportPlugin, run
+from imerit_ango.plugins import ExportPlugin, ExportResponse, run
 
 HOST = '<YOUR HOST>'
 PLUGIN_ID = '<YOUR PLUGIN ID>'
@@ -52,7 +52,9 @@ def sample_callback(**data):
         zf.writestr(project_id + '.json', json.dumps(file_list, indent=4))
 
     logger.info("Plugin session is ended!")
-    return zip_file_name, zip_data
+
+    export_response_obj = ExportResponse(file=zip_data, file_name=zip_file_name, storage_id="" ,bucket="")
+    return export_response_obj
 
 
 if __name__ == "__main__":
