@@ -7,7 +7,7 @@ PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 
 
-def run_model(**data):
+def run_model(data):
     # Extract input parameters
     project_id = data.get('projectId')
     asset_id = data.get('assetId')
