@@ -21,8 +21,8 @@ def run_model(data):
     # logger.info("Plugin session is started!")
 
     sdk = SDK(api_key=api_key, host=HOST)
-
-    get_asset_response = sdk.get_assets(project_id=project_id, asset_id=asset_id)
+    get_asset_response = sdk.get_assets(project_id=project_id, filters={"_id": asset_id})
+    
     external_id = get_asset_response['data']['assets'][0]['externalId']
 
     if category_schema is None:
