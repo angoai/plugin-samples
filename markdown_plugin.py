@@ -32,7 +32,7 @@ def check_config(config, column_names):
     return batch_name_column, external_id_columns, upload_batch_size
 
 
-def sample_callback(**data):
+def sample_callback(data):
     # Extract input parameters
     file = data.get('inputFile')
     project_id = data.get('projectId')
