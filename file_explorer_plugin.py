@@ -9,7 +9,7 @@ PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 PAGE_SIZE = 50
 
 
-def sample_callback(**data):
+def sample_callback(data):
     # Extract input parameters
     bucket = data.get("bucket")
     folder = data.get("folder", "")
