@@ -9,7 +9,7 @@ PLUGIN_ID = '<YOUR PLUGIN ID>'
 PLUGIN_SECRET = '<YOUR PLUGIN SECRET>'
 
 
-def sample_callback(**data):
+def sample_callback(data):
     # Extract input parameters
     project_id = data.get('projectId')
     json_export = data.get('jsonExport')
@@ -61,6 +61,7 @@ if __name__ == "__main__":
     plugin = ExportPlugin(id=PLUGIN_ID,
                           secret=PLUGIN_SECRET,
                           callback=sample_callback,
-                          host=HOST, version='v3')
+                          host=HOST, 
+                          version='v3')
 
     run(plugin, host=HOST)
